@@ -1,0 +1,6 @@
+{% macro render_field(field, render_label=true, extra_classes='') %}
+<div class="form-floating shadow mb-3">
+    {{ field(class_="form-control " + extra_classes, **kwargs)|safe }}
+    {% if render_label %}{{ field.label }}{% endif %}
+</div>
+{% endmacro %}

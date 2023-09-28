@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <meta charset="UTF-8">
+        <title>Modelagem de Ameaças de Projetos</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css"  type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" >
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- jQuery library -->
+        <style>
+            #loading-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+        
+            #loading-overlay.active {
+                display: flex;
+            }
+        
+            #loading-overlay .spinner {
+                border: 16px solid #f3f3f3;
+                border-top: 16px solid #3498db;
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+                animation: spin 2s linear infinite;
+            }
+
+            .loading-message {
+                color: #fff;
+                font-size: 20px;
+            }
+        
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+        </head>
+        
+<body class="sb-nav-fixed">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="{{ url_for('index')}}">
+    Cyber ThreatModeling
+    </a>
+        <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+        <!-- Navbar-->
+<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">ConfiguraçÕes</a></li>
+                <li><a class="dropdown-item" href="#!">Logs</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="{{ url_for('logout')}}">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Configuraçoes</a></li>
+                <li><a class="dropdown-item" href="#!">Logs</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading" style="text-align: center;">
+                        <div style="display: inline-block; background-image: url('{{ url_for('static', filename='assets/img/cyber_logo.svg') }}'); background-size: contain; background-repeat: no-repeat; background-position: left center; margin-left: 20px; width: 100px; height: 50px;"></div>
+                    </div>
+                    <a  href="{{ url_for('index')}}"  class="nav-link">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Painel de Controle
+                    </a>
+                    <div class="sb-sidenav-menu-heading"></div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Menu Collapse 1
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="layout-static.html">SubMenu 1-1</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">SubMenu 1-2</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Menu Collapse 2
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                SubMenu Collapse 2-1
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">SubMenu 2-1-1</a>
+                                    <a class="nav-link" href="register.html">SubMenu 2-1-2</a>
+                                    <a class="nav-link" href="password.html">SubMenu 2-1-3</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                SubMenu Collapse 2-2
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">SubMenu 2-2-1</a>
+                                    <a class="nav-link" href="404.html">SubMenu 2-2-2</a>
+                                    <a class="nav-link" href="500.html">SubMenu 2-2-3</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading"></div>
+                    <a class="nav-link" href="{{ url_for('index_arch') }}">
+                        <div class="sb-nav-link-icon" ><i class="fas fa-table"></i></div>
+                        Minhas Modelagens
+                    </a>
+                    <a class="nav-link" href="charts.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Base de Ameaças
+                    </a>
+                    <a class="nav-link" href="tables.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Relatórios de Riscos
+                    </a>
+                </div>
+            </div>
+        
+            <div class="sb-sidenav-footer">
+                <div class="small">Logado como:</div>
+                {{ current_user.username if current_user.is_authenticated else 'Guest' }}
+            </div>
+        </nav>
+    </div>
+    <div class='content' id="layoutSidenav_content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- JS Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/labels.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/compliance_status.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/adicionar_projeto.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/demo/chart-bar-demo.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/datatables-simple-demo.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#gerar-relatorio").click(function(event){
+                event.preventDefault();  // Previne o comportamento padrão do botão (submit do formulário)
+    
+                var projetoId = $('#projeto_id').val();  // Obtenha o ID do projeto do campo oculto
+    
+                // Mostrar overlay de carregamento
+                $('#loading-overlay').addClass('active');
+    
+                // Enviar uma solicitação AJAX ao servidor
+                $.ajax({
+                    url: '/gerar-relatorio',  // URL do endpoint do back-end
+                    type: 'POST',
+                    data: {
+                        'projeto_id': projetoId  // Enviando o ID do projeto como parte da requisição
+                    },
+                    success: function(response) {
+                        // Ocultar overlay de carregamento
+                        $('#loading-overlay').removeClass('active');
+                        
+                        // Faça algo com a resposta, como exibir o relatório
+                        alert(response.message);  // Apenas um exemplo, você provavelmente irá querer fazer algo mais útil
+
+                        location.reload();
+                    },
+                    error: function(error) {
+                        // Ocultar overlay de carregamento
+                        $('#loading-overlay').removeClass('active');
+                        
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+       
+    </body>
+    </html>
+    
+
+    

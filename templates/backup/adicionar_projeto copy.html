@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <div class="container-fluid px-4">
+                <ol class="breadcrumb mb-3">
+                    <li class="breadcrumb-item active">{% if projeto %}Editar Projeto{% else %}Adicionar Projeto{% endif %}</li>
+                </ol>
+            </div>
+            <div class="container mt-1 mb-5">
+                <form method="POST" action="{% if projeto %}{{ url_for('editar_projeto', projeto_id=projeto.id) }}{% else %}/adicionar_projeto{% endif %}">
+                    <div class="row mb-3 align-items-center">
+                        <div class="col">
+                            <div class="form-floating shadow mb-3">
+                                <select name="status_projeto" id="status_projeto" class="form-select">
+                                    <option value="Requisito" {% if projeto and projeto.fase == 'Requisito' %}selected{% endif %}>Requisito</option>
+                                    <option value="Design" {% if projeto and projeto.fase == 'Design' %}selected{% endif %}>Design</option>
+                                    <option value="Deploy" {% if projeto and projeto.fase == 'Deploy' %}selected{% endif %}>Deploy</option>
+                                    <option value="Sustentação" {% if projeto and projeto.fase == 'Sustentação' %}selected{% endif %}>Sustentação</option>
+                                </select>
+                                <label for="status_projeto">Fase de Envolvimento</label>
+                            </div>
+                        </div>
+                            <div class="col align-items-right">
+                                <div class="form-check form-switch" style="padding-left: 13.25rem;">
+                                    <input class="form-check-input" type="checkbox" id="compliance_projeto" name="compliance_projeto" checked>
+                                    <label class="form-check-label ml-2" for="compliance_projeto">Compliance</label>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-floating shadow mb-3">
+                                {{ render_field(form.nome, class="form-control", placeholder=" ", aria_label="Nome do Projeto", required=true) }}
+                                <label for="{{ form.nome.id_for_label }}">Nome do Projeto</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating shadow mb-3">
+                                {{ render_field(form.arquiteto, class="form-control", placeholder=" ", aria_label="Arquiteto", required=true) }}
+                                <label for="{{ form.arquiteto.id_for_label }}">Arquiteto</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-floating shadow mb-3">
+                                <textarea class="form-control" id="descricao" name="descricao" rows="2" placeholder=" " aria-label="Descrição do Projeto" required>{% if projeto %}{{ projeto.descricao }}{% endif %}</textarea>
+                                <label for="descricao">Descrição do Projeto</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating shadow mb-3">
+                                <textarea type="text" class="form-control" id="debitos_tecnicos" rows="2" placeholder=" " aria-label="Débitos Técnicos" name="debitos_tecnicos">{% if projeto %}{{ projeto.debitos_tecnicos }}{% endif %}</textarea>
+                                <label for="debitos_tecnicos">Débitos Técnicos</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="floating-label">
+                                <label for="componentes_multi">Componentes do Projeto</label>
+                            </div>    
+                            <div class="form shadow">
+                                <select name="componentes_multi[]" id="componentes_multi" class="selectpicker" multiple data-live-search="true" width="100%">
+                                    <option value="aplicacoesweb">Aplicações Web</option>
+                                    <option value="aplicacoesmoveis">Aplicações Móveis</option>
+                                    <option value="aplicacoesdesktop">Aplicações Desktop</option>
+                                    <option value="aplicacoesbackend">Aplicações Backend</option>
+                                    <option value="apis">APIs</option>
+                                    <option value="webservices">WebServices</option>
+                                    <option value="brokersdemensagens">Brokers de Mensagens</option>
+                                    <option value="etls">ETLs</option>
+                                    <option value="arquiteturaorientadaservicos">Arquitetura Orientada a Serviços</option>
+                                    <option value="orquestracao">Orquestração</option>
+                                    <option value="descobertadeservicos">Descoberta de Serviços</option>
+                                    <option value="gatewaydeapi">Gateway de API</option>
+                                </select>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="floating-label">
+                                <label for="tecnologias_multi">Tecnologias do Projeto</label>
+                            </div>  
+                            <div class="form shadow">
+                                <select name="tecnologias_multi[]" id="tecnologias_multi" class="selectpicker" multiple>
+                                    <option value="servidoresfisicos">Servidores Físicos</option>
+                                    <option value="virtualizacao">Virtualização</option>
+                                    <option value="armazenamento">Armazenamento</option>
+                                    <option value="containers">Containers</option>
+                                    <option value="vpn">VPN</option>
+                                    <option value="sdwan">SD-WAN</option>
+                                    <option value="protocolosdecomunicacao">Protocolos de Comunicação</option>
+                                    <option value="firewalls">Firewalls</option>
+                                    <option value="idsips">IDS/IPS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="floating-label">
+                                <label for="tecnologias_multi">Tecnologias do Projeto</label>
+                            </div> 
+                            <div class="form-floating shadow">
+                                <select name="arquitetura_cloud_multi[]" id="arquitetura_cloud_multi" multiple class="selectpicker">
+                                    <option value="iaas">IaaS</option>
+                                    <option value="paas">PaaS</option>
+                                    <option value="saas">SaaS</option>
+                                    <option value="multicloud">MultiCloud</option>
+                                    <option value="onprem">OnPrem</option>
+                                    <option value="hybridcloud">HybridCloud</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="container-fluid px-4">
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Requisitos de Cybersecurity</li>
+                        </ol>
+                    </div>
+                    <div class="container mt-4">
+
+                        <!-- Abas (tabs) -->
+                        <ul class="nav nav-tabs" id="cybersecurityTabs" role="tablist">
+                            {% for category in categories %}
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link {{ 'active' if loop.first }}" 
+                                id="category-{{ category.id }}-tab" 
+                                data-bs-toggle="pill" 
+                                href="#category-{{ category.id }}" 
+                                role="tab" 
+                                aria-controls="category-{{ category.id }}" 
+                                aria-selected="{{ 'true' if loop.first else 'false' }}">
+                                {{ category.category_name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <!-- Conteúdo das abas -->
+                            <div class="tab-content" id="cybersecurityTabsContent">
+                                {% for category in categories %}
+                                <div class="tab-pane fade {{ 'show active' if loop.first }}" 
+                                    id="category-{{ category.id }}" 
+                                    role="tabpanel" 
+                                    aria-labelledby="category-{{ category.id }}-tab">
+                                    <div class="row mb-6">
+                                        <div class="col mb-3">
+                                            {% for requirement in category.requirements %}
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" 
+                                                type="checkbox" 
+                                                id="requirement-{{ requirement.id }}" 
+                                                name="requirement-{{ requirement.id }}" 
+                                                {% if request.path == '/adicionar_projeto' or (request.path.startswith('/editar_projeto/') and requirement.id in attained_requirement_ids) %}checked{% endif %}>
+                                         
+                                                <label class="form-check-label" 
+                                                    for="requirement-{{ requirement.id }}">
+                                                    {{ requirement.requirement_name }}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+
+
+                            <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+                        </div>
+                    </div>
+               </div>
+        
+    </div>
+        </form>
+        {% endblock %}

@@ -1,0 +1,64 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 680-652-382
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:19] "[33mGET /adicionar_projeto HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "GET /editar_projeto/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[33mGET /editar_projeto/vendor/fontawesome-free/css/all.min.css HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/css/sb-admin-2.min.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/js/scripts.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/js/labels.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/js/compliance_status.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/js/adicionar_projeto.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/assets/demo/chart-bar-demo.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/assets/demo/chart-area-demo.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:23] "[36mGET /static/js/datatables-simple-demo.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:24] "[36mGET /static/assets/img/cyber_logo.svg HTTP/1.1[0m" 304 -
+ERROR:root:Erro ao adicionar/editar projeto: 'UnboundField' object has no attribute 'data'
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:15:34] "[35m[1mPOST /editar_projeto/10 HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/Users/daniel_arioza/Documents/GitHub/pucrs_app/app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 680-652-382
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:06] "GET /editar_projeto/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:08] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:08] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:08] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:08] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:08] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:11] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:12] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:15] "GET /editar_projeto/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:18] "GET /editar_projeto/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:20] "GET /editar_projeto/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:22] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:22] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:22] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [23/Sep/2023 03:20:22] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/daniel_arioza/Documents/GitHub/pucrs_app/app.py', reloading

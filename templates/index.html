@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block content %}
+               <main>
+                    <div class="container-fluid px-4">
+                        <ol class="breadcrumb mb-3">
+                            <li class="breadcrumb-item active">Painel Central - Cyber ThreatModeling</li>
+                        </ol>
+                        
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Requisitos pendentes</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{requisitos_sum}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fa-solid fa-circle-xmark fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Requisitos Atendidos (%)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">    {% if projetos|length > 0 %}
+                                                {{ (((requisitos_sum/((projetos|length)*28))-1)*-100)|round(2) }}%
+                                            {% else %}
+                                                0%
+                                            {% endif %}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa fa-line-chart fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Projetos Compliance
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ projetos|selectattr("compliance_projeto", "equalto", true)|list|length }}</div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-check fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Total de Projetos</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ projetos|length }}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <!-- Area Chart -->
+                        <div class="col-xl-6 col-lg-7">
+                            <div class="card shadow mb-5">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Mapa de Ameaças</h6>
+                                    <div class="dropdown no-arrow">
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myBarChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+     
+                        <div class="col-xl-6 col-lg-5">
+                                        <!-- Project Card Example -->
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">% Compliance - Domínios de Vulnerabilidades</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <!-- Itera através do dicionário percentuais_categorias -->
+                                                {% for categoria, percentual in percentuais_categorias.items() %}
+                                                    <h4 class="small font-weight-bold">{{ categoria }} <span class="float-right">{{ percentual }}%</span></h4>
+                                                    <div class="progress mb-5">
+                                                        <!-- Define a largura do progresso dinamicamente com base no valor percentual -->
+                                                        <div class="progress-bar {{ cores_categorias[categoria] }}" role="progressbar" style="width: {{ percentual }}%" aria-valuenow="{{ percentual }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        
+            
+                    </div>
+                </div>
+                        <a href="{{ url_for('adicionar_projeto')}}" 
+                        type="submit" 
+                        class="btn btn-secondary ms-1bg-aa start-0 ms-2 mb-3" 
+                        style="font-size: 16px;"
+                        onmouseover="showText(this)" 
+                        onmouseout="hideText(this)">
+                        +
+                    </a>
+                    {% for projeto in projetos|reverse %}
+                    <div class="d-style btn btn-brc-tp border-2 bgc-white w-100 my-2 py-3 shadow-sm shadow mb-3">
+                      <div class="row align-items-center">
+                        <div class="col-12 col-md-3">
+                          <h6 class="m-0 font-weight text-primary letter-spacing">
+                            <strong>{{ projeto.nome }}</strong>
+                          </h6>
+                    
+                          <div class="small font-weight">
+                            Arquiteto: {{ projeto.arquiteto.username }}
+                          </div>
+                          <div class="small font-weight">
+                            ID: {{ projeto.id }}
+                          </div>
+                        </div>
+                    
+                        <div class="col-12 col-md-3">
+                          <div class="small font-weight">
+                            <p class="mb-0">
+                              <strong>Descrição:</strong> {{ projeto.descricao }}
+                            </p>
+                            <p class="mb-0">
+                              <strong>Fase do Projeto:</strong> {{ projeto.status_projeto }}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                          <div class="small font-weight">
+                            <p class="mb-0">
+                              <strong>Compliance</strong>
+                            </p>
+                            <td class="text-center" style="font-size: 14px;"> <!-- Centralizado -->
+                                {% if not projeto.compliance_projeto %}
+                                    <i class="fas fa-exclamation-triangle fa-2x" style="color: gold;"></i> <!-- ícone de atenção/perigo para true -->
+                                {% else %}
+                                    <i class="fa fa-check-circle fa-2x" style="color: #1cc88a;"></i> <!-- ícone de verificação para false -->
+                                {% endif %}
+                              </td>
+                            </td>
+                          </div>
+                        </div>
+                    
+                        <div class="col-12 col-md-2 text-right">
+                            <div class="text-center"> <!-- Centralizado -->
+                                <!-- Formulário para Excluir -->
+                                <form action="{{ url_for('excluir_projeto', projeto_id=projeto.id) }}" method="post" style="display:inline-block;">
+                                    <button class="btn btn-secondary" style="font-size: 12px;" onclick="return confirm('Tem certeza que deseja excluir o projeto {{projeto.id}}? A ação é irreversivel.');">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            
+                                <!-- Formulário para Concluir (somente se ele de fato precisa de um formulário) -->
+                                <form style="display:inline-block;">
+                                    <button type="submit" id="gerar-relatorio" class="btn btn-secondary ms-1" style="font-size: 12px;">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </form>
+                            
+                                <!-- Botão Editar com ícone de caneta -->
+                                <a href="{{ url_for('editar_projeto', projeto_id=projeto.id) }}" class="btn btn-secondary ms-1" style="font-size: 12px;">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                            </div>
+                            
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endblock %}
+                
+                
+
+ 

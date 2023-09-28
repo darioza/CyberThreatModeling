@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CTM Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <section class="hero is-primary is-fullheight">
+
+        <div class="hero-head">
+            <nav class="navbar">
+             <div class="container">
+
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('index')}}" class="navbar-item">
+                                Home
+                            </a>
+                            <a href="{{ url_for('profile')}}" class="navbar-item">
+                                Profile
+                            </a>
+                            <a href="{{ url_for('login')}}" class="navbar-item">
+                                Login
+                            </a>
+                            <a href="{{ url_for('signup')}}" class="navbar-item">
+                                Sign Up
+                            </a>
+                            <a href="{{ url_for('logout')}}" class="navbar-item">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div style="text-align: center;">
+                        <div style="display: inline-block; background-image: url('{{ url_for('static', filename='assets/img/cyber_logo-removebg.png') }}'); background-size: contain; background-repeat: no-repeat; margin-left: 0px; width: 200px; height: 200px;"></div>
+                </div>
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title"></h3>
+                    <div class="box">
+                        <form method="POST" action="/login">
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="notification is-danger">
+                                    {{ messages[0] }}
+                                </div>
+                            {% endif %}
+                            {% endwith %}
+                            <form method="POST" action="/login">
+                                {{ form.hidden_tag() }}
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-small" type="email" name="email" placeholder="Digite o e-mail" autofocus="">
+                                </div>
+                            </div>
+                
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-small" type="password" name="password" placeholder="Insira sua senha">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Lembrar
+                                </label>
+                            </div>
+                            <button class="button is-block is-info is-medium is-fullwidth">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
