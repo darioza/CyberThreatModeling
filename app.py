@@ -42,8 +42,6 @@ from key import SECRET_KEY
 import traceback
 from flask_login import current_user
 
-
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projeto.db'
@@ -85,8 +83,7 @@ class Project(db.Model):
 
     arquiteto = db.relationship('User', back_populates='project')
     requirements = db.relationship('ProjectCybersecurityRequirements', back_populates='project')
-
-    
+   
 class ProjectCybersecurityRequirements(db.Model):
     __tablename__ = 'ProjectCybersecurityRequirements'
     projeto_id = db.Column(db.Integer, db.ForeignKey('projeto.id'), primary_key=True)
@@ -94,6 +91,88 @@ class ProjectCybersecurityRequirements(db.Model):
     attainment = db.Column(db.Boolean, default=True)
     project = db.relationship('Project', back_populates='requirements')
     requirement = db.relationship('CybersecurityRequirements', back_populates='projects')
+    
+class Domains(db.Model):
+    __tablename__ = 'Domains'
+    DomainID = db.Column(db.Integer, primary_key=True)
+    DomainName = db.Column(db.Text, unique=True, nullable=False)
+    requirements = db.relationship('Requirements', backref='domain', lazy=True)
+    requirements_assessment = db.relationship('Requirements_assessment', backref='domain', lazy=True)
+    def serialize(self):
+        return {
+            'DomainID': self.DomainID,
+            'DomainName': self.DomainName
+        }
+
+class Requirements(db.Model):
+    __tablename__ = 'Requirements'
+    RequirementID = db.Column(db.Integer, primary_key=True)
+    DomainID = db.Column(db.Integer, db.ForeignKey('Domains.DomainID'))
+    RequirementText = db.Column(db.Text, nullable=False)
+    RefText = db.Column(db.Text)
+    risks = db.relationship('Risks', backref='requirement', lazy=True)
+    preventive_controls = db.relationship('PreventiveControls', backref='requirement', lazy=True)
+    corrective_controls = db.relationship('CorrectiveControls', backref='requirement', lazy=True)
+    detective_controls = db.relationship('DetectiveControls', backref='requirement', lazy=True)
+    
+class Risks(db.Model):
+    __tablename__ = 'Risks'
+    RiskID = db.Column(db.Integer, primary_key=True)
+    RequirementID = db.Column(db.Integer, db.ForeignKey('Requirements.RequirementID'))
+    RiskText = db.Column(db.Text, nullable=False)
+
+class PreventiveControls(db.Model):
+    __tablename__ = 'PreventiveControls'
+    ControlID = db.Column(db.Integer, primary_key=True)
+    RequirementID = db.Column(db.Integer, db.ForeignKey('Requirements.RequirementID'))
+    ControlText = db.Column(db.Text, nullable=False)
+
+class CorrectiveControls(db.Model):
+    __tablename__ = 'CorrectiveControls'
+    ControlID = db.Column(db.Integer, primary_key=True)
+    RequirementID = db.Column(db.Integer, db.ForeignKey('Requirements.RequirementID'))
+    ControlText = db.Column(db.Text, nullable=False)
+
+class DetectiveControls(db.Model):
+    __tablename__ = 'DetectiveControls'
+    ControlID = db.Column(db.Integer, primary_key=True)
+    RequirementID = db.Column(db.Integer, db.ForeignKey('Requirements.RequirementID'))
+    ControlText = db.Column(db.Text, nullable=False)
+
+class Requirements_assessment(db.Model):
+    __tablename__ = 'Requirements_assessment'
+    RequirementID = db.Column(db.Integer, primary_key=True)
+    DomainID = db.Column(db.Integer, db.ForeignKey('Domains.DomainID'))
+    RequirementText = db.Column(db.Text)
+    RefText = db.Column(db.Text)
+    risks_assessment = db.relationship('Risks_assessment', backref='requirements_assessment', lazy=True)
+    preventive_controls_assessment = db.relationship('PreventiveControls_assessment', backref='requirements_assessment', lazy=True)
+    corrective_controls_assessment = db.relationship('CorrectiveControls_assessment', backref='requirements_assessment', lazy=True)
+    detective_controls_assessment = db.relationship('DetectiveControls_assessment', backref='requirements_assessment', lazy=True)
+
+class Risks_assessment(db.Model):
+    __tablename__ = 'Risks_assessment'
+    RiskID = db.Column(db.Integer, primary_key=True)
+    RequirementID = db.Column(db.Integer, db.ForeignKey('Requirements_assessment.RequirementID'))
+    RiskText = db.Column(db.Text)
+
+class PreventiveControls_assessment(db.Model):
+    __tablename__ = 'PreventiveControls_assessment'
+    PreventiveControlID = db.Column(db.Integer, primary_key=True)
+    RequirementID = db.Column(db.Integer, db.ForeignKey('Requirements_assessment.RequirementID'))
+    PreventiveControlText = db.Column(db.Text)
+
+class CorrectiveControls_assessment(db.Model):
+    __tablename__ = 'CorrectiveControls_assessment'
+    CorrectiveControlID = db.Column(db.Integer, primary_key=True)
+    RequirementID = db.Column(db.Integer, db.ForeignKey('Requirements_assessment.RequirementID'))
+    CorrectiveControlText = db.Column(db.Text)
+
+class DetectiveControls_assessment(db.Model):
+    __tablename__ = 'DetectiveControls_assessment'
+    DetectiveControlID = db.Column(db.Integer, primary_key=True)
+    RequirementID = db.Column(db.Integer, db.ForeignKey('Requirements_assessment.RequirementID'))
+    DetectiveControlText = db.Column(db.Text)
     
     #Cores das Categorias
     
@@ -205,6 +284,54 @@ class ProjectForm(FlaskForm):
         ('kubernetes', 'Kubernetes')
     ])
     submit = SubmitField('Salvar')
+    
+def serialize_data(requirements, model_type):
+    serialized_data = []
+    for requirement in requirements:
+        data = {
+            'RequirementID': requirement.RequirementID,
+            'RequirementText': requirement.RequirementText,
+            'RefText': requirement.RefText
+        }
+        if model_type == 'Requirements':
+            data.update({
+                'Risks': [{'RiskID': risk.RiskID, 'RiskText': risk.RiskText} for risk in requirement.risks],
+                'PreventiveControls': [{'ControlID': control.ControlID, 'ControlText': control.ControlText} for control in requirement.preventive_controls],
+                'CorrectiveControls': [{'ControlID': control.ControlID, 'ControlText': control.ControlText} for control in requirement.corrective_controls],
+                'DetectiveControls': [{'ControlID': control.ControlID, 'ControlText': control.ControlText} for control in requirement.detective_controls]
+            })
+        elif model_type == 'Requirements_assessment':
+            # assumindo que os relacionamentos são similares aos do modelo Requirements
+            data.update({
+                'Risks': [{'RiskID': risk.RiskID, 'RiskText': risk.RiskText} for risk in requirement.risks_assessment],
+                'PreventiveControls': [{'ControlID': control.PreventiveControlID, 'ControlText': control.PreventiveControlText} for control in requirement.preventive_controls_assessment],
+                'CorrectiveControls': [{'ControlID': control.CorrectiveControlID, 'ControlText': control.CorrectiveControlText} for control in requirement.corrective_controls_assessment],
+                'DetectiveControls': [{'ControlID': control.DetectiveControlID, 'ControlText': control.DetectiveControlText} for control in requirement.detective_controls_assessment]
+            })
+        serialized_data.append(data)
+    return serialized_data
+
+
+@app.route('/risk_assessment')
+def risk_assessment():
+    return render_template('risk_assessment.html')
+
+@app.route('/api/domains')
+def get_domains():
+    domains = Domains.query.all()
+    return jsonify([domain.serialize() for domain in domains])
+
+@app.route('/api/requirements/<int:domain_id>')
+def get_requirements(domain_id):
+    requirements = Requirements.query.filter_by(DomainID=domain_id).all()
+    return jsonify(serialize_data(requirements, 'Requirements'))
+
+@app.route('/api/requirements_assessment/<int:domain_id>')
+def get_requirements_assessment(domain_id):
+    requirements_assessment = Requirements_assessment.query.filter_by(DomainID=domain_id).all()
+    return jsonify(serialize_data(requirements_assessment, 'Requirements_assessment'))
+
+
    
 @app.route('/adicionar_projeto', methods=['GET', 'POST'])
 @login_required
@@ -640,3 +767,9 @@ def signup():
 if __name__ == '__main__':
     app.run(debug=True)
 
+'''
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+'''
