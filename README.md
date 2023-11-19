@@ -1,7 +1,8 @@
-<img src="https://github.com/darioza/CyberThreatModeling/assets/24236687/92dc5807-6b8c-497b-a44c-a0d628fc616c" alt="CTM" width="100"/>
+
+
 # Projeto de Segurança Cibernética - CyberThreat Modeling
 
-![Capa do CyberThreat Modeling](URL_DA_IMAGEM_DE_CAPA) <!-- Substitua URL_DA_IMAGEM_DE_CAPA pela URL da imagem de capa desejada -->
+<img src="https://github.com/darioza/CyberThreatModeling/assets/24236687/92dc5807-6b8c-497b-a44c-a0d628fc616c" alt="CTM" width="100"/>
 
 ![Status do Projeto](https://img.shields.io/badge/status-em%20desenvolvimento-brightgreen)
 ![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg)
@@ -33,10 +34,33 @@ O CyberThreat Modeling é uma ferramenta inovadora projetada para arquitetos de 
 - **Geração de Relatórios**: Cria relatórios detalhados, apoiados por inteligência artificial, para uma análise aprofundada da segurança.
 - **Demonstração**: [Clique aqui](https://www.cyberthreatmodeling.com.br/) para ver a demonstração.
 
+
+
+## Como Contribuir
+
+Para contribuir com o projeto, siga estas etapas:
+
+- *Faça um fork do repositório.
+- *Crie uma branch para sua feature (git checkout -b feature/novaFeature).
+- *Faça suas alterações e commit (git commit -am 'Adicionando uma nova feature').
+- *Push para a branch (git push origin feature/novaFeature).
+- *Abra um Pull Request.
+
+## Onde Encontrar Ajuda
+
+Se você tiver dúvidas ou precisar de assistência, pode:
+
+*Consultar a documentação do projeto.
+*Abrir uma issue no GitHub para questões específicas.
+*Entrar em contato com a equipe de suporte através do email daniel.arioza@gmail.com.
+
+## Desenvolvedores do Projeto
+Daniel Arioza - Arquiteto de Cybersecurity e Desenvolvedor Principal
+
 ## Acesso ao Projeto
 Para acessar o projeto, clone o repositório e siga as instruções de instalação:
 
-###Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 Para executar este projeto, você precisará dos seguintes pré-requisitos:
 
@@ -49,7 +73,7 @@ Para executar este projeto, você precisará dos seguintes pré-requisitos:
 * open_ai
 * requests
 
-###Instalação
+## Instalação
 
 Para instalar o projeto, siga estas etapas:
 
@@ -108,23 +132,5 @@ CREATE TABLE ProjectCybersecurityRequirements (
     PRIMARY KEY (projeto_id, requirement_id),
     FOREIGN KEY (projeto_id) REFERENCES Project(id),
 
-###Como Contribuir
 
-Para contribuir com o projeto, siga estas etapas:
 
-- *Faça um fork do repositório.
-- *Crie uma branch para sua feature (git checkout -b feature/novaFeature).
-- *Faça suas alterações e commit (git commit -am 'Adicionando uma nova feature').
-- *Push para a branch (git push origin feature/novaFeature).
-- *Abra um Pull Request.
-
-###Onde Encontrar Ajuda
-
-Se você tiver dúvidas ou precisar de assistência, pode:
-
-*Consultar a documentação do projeto.
-*Abrir uma issue no GitHub para questões específicas.
-*Entrar em contato com a equipe de suporte através do email daniel.arioza@gmail.com.
-
-###Autor
-Daniel Arioza - Arquiteto de Cybersecurity e Desenvolvedor Principal
