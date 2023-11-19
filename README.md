@@ -40,19 +40,19 @@ O CyberThreat Modeling é uma ferramenta inovadora projetada para arquitetos de 
 
 Para contribuir com o projeto, siga estas etapas:
 
-- *Faça um fork do repositório.
-- *Crie uma branch para sua feature (git checkout -b feature/novaFeature).
-- *Faça suas alterações e commit (git commit -am 'Adicionando uma nova feature').
-- *Push para a branch (git push origin feature/novaFeature).
-- *Abra um Pull Request.
+- Faça um fork do repositório.
+- Crie uma branch para sua feature (git checkout -b feature/novaFeature).
+- Faça suas alterações e commit (git commit -am 'Adicionando uma nova feature').
+- Push para a branch (git push origin feature/novaFeature).
+- Abra um Pull Request.
 
 ## Onde Encontrar Ajuda
 
 Se você tiver dúvidas ou precisar de assistência, pode:
 
-*Consultar a documentação do projeto.
-*Abrir uma issue no GitHub para questões específicas.
-*Entrar em contato com a equipe de suporte através do email daniel.arioza@gmail.com.
+- Consultar a documentação do projeto.
+- Abrir uma issue no GitHub para questões específicas.
+- Entrar em contato com a equipe de suporte através do email daniel.arioza@gmail.com.
 
 ## Desenvolvedores do Projeto
 Daniel Arioza - Arquiteto de Cybersecurity e Desenvolvedor Principal
