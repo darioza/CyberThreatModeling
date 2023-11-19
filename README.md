@@ -2,7 +2,9 @@
 
 # Projeto de Segurança Cibernética - CyberThreat Modeling
 
-<img src="https://github.com/darioza/CyberThreatModeling/assets/24236687/92dc5807-6b8c-497b-a44c-a0d628fc616c" alt="CTM" width="100"/>
+<div align="center">
+    <img src="https://github.com/darioza/CyberThreatModeling/assets/24236687/92dc5807-6b8c-497b-a44c-a0d628fc616c" alt="CTM" width="100"/>
+</div>
 
 ![Status do Projeto](https://img.shields.io/badge/status-em%20desenvolvimento-brightgreen)
 ![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg)
@@ -50,12 +52,11 @@ Para contribuir com o projeto, siga estas etapas:
 
 Se você tiver dúvidas ou precisar de assistência, pode:
 
-- Consultar a documentação do projeto.
 - Abrir uma issue no GitHub para questões específicas.
 - Entrar em contato com a equipe de suporte através do email daniel.arioza@gmail.com.
 
 ## Desenvolvedores do Projeto
-Daniel Arioza - Arquiteto de Cybersecurity e Desenvolvedor Principal
+Daniel Arioza - Arquiteto de Cybersecurity e Desenvolvedor Principal (https://www.linkedin.com/in/daniel-arioza/)
 
 ## Acesso ao Projeto
 Para acessar o projeto, clone o repositório e siga as instruções de instalação:
